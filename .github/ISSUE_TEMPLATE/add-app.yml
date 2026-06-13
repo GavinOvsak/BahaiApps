@@ -1,0 +1,85 @@
+name: Add an App or Resource
+description: Submit a new Bahai app or resource for inclusion in the directory
+title: "Add App: "
+labels: ["add-app"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for submitting! Fill in as many fields as you can. A maintainer will review and add it to `apps.json`.
+
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      placeholder: e.g. My Prayer App
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      placeholder: https://…
+    validations:
+      required: true
+
+  - type: input
+    id: github
+    attributes:
+      label: GitHub repo (if open source)
+      placeholder: username/repo
+
+  - type: dropdown
+    id: access
+    attributes:
+      label: Access
+      description: Is this freely accessible without login?
+      options:
+        - "open — Free, no account required"
+        - "closed — Login or account required"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options:
+        - App (mobile or web app)
+        - Resource (website, collection, or reference)
+    validations:
+      required: true
+
+  - type: input
+    id: tags
+    attributes:
+      label: Tags (comma separated)
+      placeholder: e.g. prayers, devotional, children
+    validations:
+      required: true
+
+  - type: input
+    id: languages
+    attributes:
+      label: Languages supported (ISO codes, comma separated)
+      placeholder: e.g. en, fa, ar, es
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: One or two sentences describing what it does.
+      placeholder: A simple app that…
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: The app or resource is related to the Bahai Faith
+          required: true
+        - label: The URL is publicly accessible
+          required: true
+        - label: I have tested that the link works
+          required: true

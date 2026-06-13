@@ -1,0 +1,28 @@
+name: Suggest an Edit
+description: Request a change to an existing app or resource listing
+title: "Edit: "
+labels: ["edit-app"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: App name
+      placeholder: e.g. Bahai Song Project
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: Current URL
+    validations:
+      required: true
+
+  - type: textarea
+    id: changes
+    attributes:
+      label: Suggested changes
+      description: Describe what should be updated (name, URL, tags, description, etc.)
+      placeholder: The URL has changed to…
+    validations:
+      required: true

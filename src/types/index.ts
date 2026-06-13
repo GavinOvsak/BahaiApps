@@ -5,8 +5,9 @@ export interface BahaiApp {
   url: string;
   tags: string[];
   access: AccessType;
+  languages?: string[];
   github?: string;
   description?: string;
   dateAdded?: string;
-  resource?: boolean; // true = website/resource, false/undefined = app
+  resource?: boolean;
 }
