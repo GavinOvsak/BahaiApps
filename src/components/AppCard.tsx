@@ -23,16 +23,34 @@ function tagColor(tag: string): string {
 interface Props {
   app: BahaiApp;
   activeTag: string | null;
+  /** true if this app is starred (GitHub or local) */
   isStarred: boolean;
+  /** true only if starred via GitHub (so we show the GitHub star badge, not a toggle) */
+  isGitHubStarred: boolean;
   onTagClick: (tag: string) => void;
   onInfoClick: () => void;
+  /** only called for non-GitHub apps */
+  onStarClick: () => void;
 }
 
-export default function AppCard({ app, activeTag, isStarred, onTagClick, onInfoClick }: Props) {
+export default function AppCard({
+  app,
+  activeTag,
+  isStarred,
+  isGitHubStarred,
+  onTagClick,
+  onInfoClick,
+  onStarClick,
+}: Props) {
   const { t } = useT();
+  const hasGitHub = !!app.github;
 
   return (
-    <div className={`bg-white rounded-2xl border shadow-sm hover:shadow-md transition-shadow flex flex-col ${isStarred ? 'border-yellow-300' : 'border-gray-100'}`}>
+    <div
+      className={`bg-white rounded-2xl border shadow-sm hover:shadow-md transition-shadow flex flex-col ${
+        isStarred ? 'border-yellow-300' : 'border-gray-100'
+      }`}
+    >
       <div className="p-4 flex-1 flex flex-col gap-2">
         {/* Header */}
         <div className="flex items-start justify-between gap-2">
@@ -48,10 +66,29 @@ export default function AppCard({ app, activeTag, isStarred, onTagClick, onInfoC
               {app.name}
             </h3>
           </div>
+
           <div className="flex items-center gap-1.5 shrink-0">
-            {isStarred && (
-              <span className="text-yellow-400 text-sm" title="You've starred this on GitHub">⭐</span>
+            {/* GitHub apps: static star badge (reflects your GitHub stars) */}
+            {hasGitHub ? (
+              <span
+                title={isGitHubStarred ? 'You starred this on GitHub' : 'Not starred on GitHub'}
+                className={`text-sm ${isGitHubStarred ? 'text-yellow-400' : 'text-gray-200'}`}
+              >
+                ⭐
+              </span>
+            ) : (
+              /* Non-GitHub apps: interactive local star toggle */
+              <button
+                onClick={onStarClick}
+                title={isStarred ? 'Remove from favourites' : 'Save to favourites'}
+                className={`text-sm transition-colors ${
+                  isStarred ? 'text-yellow-400 hover:text-yellow-500' : 'text-gray-200 hover:text-yellow-300'
+                }`}
+              >
+                ⭐
+              </button>
             )}
+
             <span
               className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                 app.access === 'open'
@@ -106,7 +143,7 @@ export default function AppCard({ app, activeTag, isStarred, onTagClick, onInfoC
         >
           {app.resource ? t.visitSite : t.openApp}
         </a>
-        {app.github && (
+        {hasGitHub && (
           <a
             href={`https://github.com/${app.github}`}
             target="_blank"
