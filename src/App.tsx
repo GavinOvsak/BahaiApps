@@ -394,6 +394,7 @@ export default function App() {
                 app={app}
                 activeTag={activeTag}
                 isStarred={isStarred(app, localStars, starredRepos)}
+                isGitHubStarred={!!app.github && starredRepos.has(app.github.toLowerCase())}
                 onTagClick={handleTagClick}
                 onInfoClick={() => setDetailApp(app)}
                 onStarClick={() => toggleLocalStar(app.url)}
