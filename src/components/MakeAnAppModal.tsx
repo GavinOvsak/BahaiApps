@@ -1,8 +1,9 @@
 interface Props {
   onClose: () => void;
+  onSubmitApp: () => void;
 }
 
-export default function MakeAnAppModal({ onClose }: Props) {
+export default function MakeAnAppModal({ onClose, onSubmitApp }: Props) {
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
@@ -102,14 +103,12 @@ export default function MakeAnAppModal({ onClose }: Props) {
         <div className="mt-5 pt-4 border-t border-gray-100 text-center">
           <p className="text-xs text-gray-400">
             Have an app to add?{' '}
-            <a
-              href="https://github.com/gavinovsak/BahaiApps/issues/new?title=Add+App&body=Name:%0AURL:%0ATags:%0ADescription:"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => { onClose(); onSubmitApp(); }}
               className="text-emerald-600 underline hover:text-emerald-800"
             >
-              Submit it via GitHub
-            </a>
+              Submit it here
+            </button>
           </p>
         </div>
       </div>

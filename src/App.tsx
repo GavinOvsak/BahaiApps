@@ -426,7 +426,7 @@ export default function App() {
 
       {/* Modals */}
       {detailApp && <AppDetailModal app={detailApp} onClose={() => setDetailApp(null)} />}
-      {showMakeApp && <MakeAnAppModal onClose={() => setShowMakeApp(false)} />}
+      {showMakeApp && <MakeAnAppModal onClose={() => setShowMakeApp(false)} onSubmitApp={() => setShowSubmit(true)} />}
       {showAccount && (
         <AccountModal
           githubUsername={githubUsername}
