@@ -1,6 +1,22 @@
 import { BahaiApp } from '../types';
 import { useT } from '../TranslationContext';
 
+function StarIcon({ filled, className }: { filled: boolean; className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill={filled ? 'currentColor' : 'none'}
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
+}
+
 const TAG_COLORS = [
   'bg-emerald-100 text-emerald-800',
   'bg-blue-100 text-blue-800',
@@ -70,22 +86,23 @@ export default function AppCard({
           <div className="flex items-center gap-1.5 shrink-0">
             {/* GitHub apps: static star badge (reflects your GitHub stars) */}
             {hasGitHub ? (
-              <span
-                title={isGitHubStarred ? 'You starred this on GitHub' : 'Not starred on GitHub'}
-                className={`text-sm ${isGitHubStarred ? 'text-yellow-400' : 'text-gray-200'}`}
-              >
-                ⭐
+              <span title={isGitHubStarred ? 'You starred this on GitHub' : 'Not starred on GitHub'}>
+                <StarIcon
+                  filled={isGitHubStarred}
+                  className={`w-4 h-4 transition-colors ${isGitHubStarred ? 'text-yellow-400' : 'text-gray-300'}`}
+                />
               </span>
             ) : (
               /* Non-GitHub apps: interactive local star toggle */
               <button
                 onClick={onStarClick}
                 title={isStarred ? 'Remove from favourites' : 'Save to favourites'}
-                className={`text-sm transition-colors ${
-                  isStarred ? 'text-yellow-400 hover:text-yellow-500' : 'text-gray-200 hover:text-yellow-300'
-                }`}
+                className="transition-colors"
               >
-                ⭐
+                <StarIcon
+                  filled={isStarred}
+                  className={`w-4 h-4 transition-colors ${isStarred ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-300'}`}
+                />
               </button>
             )}
 
