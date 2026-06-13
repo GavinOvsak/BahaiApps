@@ -64,7 +64,7 @@ A good starting prompt might be:
 
 ### 2. Fork an existing app
 
-Any app in this directory with a `</>` button has its source code publicly available on GitHub. You can copy it and make your own version:
+Any app in this directory with a `</>` button has its source code publicly available on GitHub. You can copy it or link to it in a message to a coding AI and make your own version:
 
 1. Click the `</>` button on any card to go to its GitHub page
 2. Click **Fork** (top right on GitHub) — this copies it to your account
