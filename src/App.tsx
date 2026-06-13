@@ -37,7 +37,7 @@ export default function App() {
   });
 
   // Local stars
-  const [localStars, _setLocalStars] = useState<Set<string>>(() => {
+  const [localStars, setLocalStars] = useState<Set<string>>(() => {
     try { return new Set(JSON.parse(localStorage.getItem('bahaiapps_local_stars') ?? '[]')); }
     catch { return new Set(); }
   });
@@ -116,6 +116,15 @@ export default function App() {
     setActiveLangs((prev) =>
       prev.includes(code) ? prev.filter((l) => l !== code) : [...prev, code],
     );
+  }
+
+  function toggleLocalStar(url: string) {
+    setLocalStars((prev) => {
+      const next = new Set(prev);
+      next.has(url) ? next.delete(url) : next.add(url);
+      localStorage.setItem('bahaiapps_local_stars', JSON.stringify([...next]));
+      return next;
+    });
   }
 
   function saveUsername(u: string) {
@@ -232,7 +241,9 @@ export default function App() {
                   : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
               }`}
             >
-              <span>⚙</span>
+              <svg className="w-4 h-4 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+                <path fillRule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm3 5A.75.75 0 015.75 9h8.5a.75.75 0 010 1.5h-8.5A.75.75 0 015 9.75zm4 5a.75.75 0 01.75-.75h.5a.75.75 0 010 1.5h-.5a.75.75 0 01-.75-.75z" clipRule="evenodd" />
+              </svg>
               <span className="hidden sm:inline">{showFilters ? t.hideFilters : t.filters}</span>
               {activeFilterCount > 0 && (
                 <span className="absolute -top-1.5 -right-1.5 bg-emerald-600 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold">
@@ -385,6 +396,7 @@ export default function App() {
                 isStarred={isStarred(app, localStars, starredRepos)}
                 onTagClick={handleTagClick}
                 onInfoClick={() => setDetailApp(app)}
+                onStarClick={() => toggleLocalStar(app.url)}
               />
             ))}
           </div>

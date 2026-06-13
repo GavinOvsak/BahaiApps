@@ -26,9 +26,10 @@ interface Props {
   isStarred: boolean;
   onTagClick: (tag: string) => void;
   onInfoClick: () => void;
+  onStarClick: () => void;
 }
 
-export default function AppCard({ app, activeTag, isStarred, onTagClick, onInfoClick }: Props) {
+export default function AppCard({ app, activeTag, isStarred, onTagClick, onInfoClick, onStarClick }: Props) {
   const { t } = useT();
 
   return (
@@ -49,9 +50,13 @@ export default function AppCard({ app, activeTag, isStarred, onTagClick, onInfoC
             </h3>
           </div>
           <div className="flex items-center gap-1.5 shrink-0">
-            {isStarred && (
-              <span className="text-yellow-400 text-sm" title="You've starred this on GitHub">⭐</span>
-            )}
+            <button
+              onClick={onStarClick}
+              title={isStarred ? 'Remove from favourites' : 'Add to favourites'}
+              className={`text-sm transition-colors ${isStarred ? 'text-yellow-400 hover:text-yellow-500' : 'text-gray-200 hover:text-yellow-300'}`}
+            >
+              ⭐
+            </button>
             <span
               className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                 app.access === 'open'
