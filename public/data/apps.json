@@ -4,6 +4,7 @@
     "url": "https://www.bahaisongproject.com/",
     "tags": ["songs", "music", "devotional"],
     "access": "open",
+    "languages": ["en"],
     "description": "A growing collection of Bahai-inspired songs searchable by theme, language, and artist.",
     "dateAdded": "2026-06-13",
     "resource": true
@@ -13,14 +14,16 @@
     "url": "https://bahaiprayers.app",
     "tags": ["prayers", "devotional"],
     "access": "open",
+    "languages": ["en", "fa", "ar"],
     "description": "A simple, beautiful app for browsing and reading Bahai prayers.",
     "dateAdded": "2026-06-13"
   },
   {
-    "name": "Ruhi Books",
+    "name": "Ruhi Institute",
     "url": "https://www.ruhi.org",
     "tags": ["education", "study", "community-building"],
     "access": "open",
+    "languages": ["en", "es", "fr", "pt", "ar", "fa", "ru"],
     "description": "Ruhi Institute study materials and books for individual and community study.",
     "dateAdded": "2026-06-13",
     "resource": true
@@ -30,16 +33,18 @@
     "url": "https://www.bahai.org/library/",
     "tags": ["writings", "reference", "education"],
     "access": "open",
+    "languages": ["en", "es", "fr", "ar", "fa", "pt", "ru"],
     "description": "Official collection of the Bahai writings and other reference materials.",
     "dateAdded": "2026-06-13",
     "resource": true
   },
   {
-    "name": "Children's Classes Resource",
-    "url": "https://www.bahaichildren.org",
-    "tags": ["children", "education", "community-building"],
+    "name": "Ocean 2.0",
+    "url": "https://oceanlibrary.com",
+    "tags": ["writings", "reference", "search"],
     "access": "open",
-    "description": "Resources and lesson plans for Bahai children's classes.",
+    "languages": ["en", "es", "fr", "ar", "fa", "pt", "ru"],
+    "description": "A powerful search engine across thousands of pages of Bahai texts and related literature.",
     "dateAdded": "2026-06-13",
     "resource": true
   },
@@ -48,15 +53,17 @@
     "url": "https://lights-of-guidance.netlify.app",
     "tags": ["reference", "writings", "guidance"],
     "access": "open",
+    "languages": ["en"],
     "description": "Searchable compilation of guidance from Bahai institutions.",
     "dateAdded": "2026-06-13"
   },
   {
-    "name": "Ocean 2.0",
-    "url": "https://oceanlibrary.com",
-    "tags": ["writings", "reference", "search"],
+    "name": "Children's Class Resources",
+    "url": "https://www.bahaichildren.org",
+    "tags": ["children", "education", "community-building"],
     "access": "open",
-    "description": "A powerful search engine across thousands of pages of Bahai texts and related literature.",
+    "languages": ["en"],
+    "description": "Resources and lesson plans for Bahai children's classes.",
     "dateAdded": "2026-06-13",
     "resource": true
   }
