@@ -77,6 +77,20 @@ export default function App() {
     [tagCounts],
   );
 
+  // For tags that belong to exactly one app (across all apps), map to that app's URL so the chip links directly.
+  const tagToSingleUrl = useMemo(() => {
+    const map: Record<string, string> = {};
+    const tagApps: Record<string, string[]> = {};
+    apps.forEach((a) => a.tags.forEach((tag) => {
+      tagApps[tag] = tagApps[tag] ?? [];
+      tagApps[tag].push(a.url);
+    }));
+    Object.entries(tagApps).forEach(([tag, urls]) => {
+      if (urls.length === 1) map[tag] = urls[0];
+    });
+    return map;
+  }, [apps]);
+
   // Derived: language counts
   const langCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -330,17 +344,33 @@ export default function App() {
               >
                 {t.all}
               </button>
-              {allTags.map((tag) => (
-                <button
-                  key={tag}
-                  onClick={() => handleTagClick(tag)}
-                  className={`shrink-0 text-xs px-3 py-1 rounded-full font-medium transition-colors ${
-                    activeTag === tag ? 'bg-emerald-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  }`}
-                >
-                  {tag} <span className="opacity-60">{tagCounts[tag]}</span>
-                </button>
-              ))}
+              {allTags.map((tag) => {
+                const singleUrl = tagToSingleUrl[tag];
+                if (singleUrl) {
+                  return (
+                    <a
+                      key={tag}
+                      href={singleUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 text-xs px-3 py-1 rounded-full font-medium transition-colors bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    >
+                      {tag}
+                    </a>
+                  );
+                }
+                return (
+                  <button
+                    key={tag}
+                    onClick={() => handleTagClick(tag)}
+                    className={`shrink-0 text-xs px-3 py-1 rounded-full font-medium transition-colors ${
+                      activeTag === tag ? 'bg-emerald-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                  >
+                    {tag} <span className="opacity-60">{tagCounts[tag]}</span>
+                  </button>
+                );
+              })}
             </div>
           )}
         </div>
